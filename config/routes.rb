@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   root 'pages#home'
   # Get into pages controller and look for home action
 
