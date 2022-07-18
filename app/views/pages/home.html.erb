@@ -1,8 +1,8 @@
 <div class="container">
-    <h1>My Personal Home Page</h1>
-    <p>You can read about me or check out the blog!</p>
-    <!-- Instead of below tag -->
-    <!-- <a href="/about">About Me</a>, use this %>  -->
-    <%= link_to 'About Me', about_path%>
+  <h1>My Personal Home Page</h1>
+  <p>You can read about me or check out the blog!</p>
+  <!-- Instead of below tag -->
+  <!-- <a href="/about">About Me</a>, use this %>  -->
+  <%= link_to 'About Me', about_path, class: "btn btn-secondary" %>
+  <%= link_to 'Blog', posts_path, class: "btn btn-primary" %>
 </div>
-    
