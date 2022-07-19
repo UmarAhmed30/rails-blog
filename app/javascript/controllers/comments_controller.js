@@ -39,6 +39,5 @@ export default class extends Controller {
   toggleEditButtonClass(editButton) {
     editButton.classList.toggle("btn-warning");
     editButton.classList.toggle("btn-secondary");
-    console.log("Hello");
   }
 }
