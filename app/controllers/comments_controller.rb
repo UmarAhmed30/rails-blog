@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       flash[:notice] = 'Comment created successfully!'
       redirect_to post_path(@post)
     else
-      flah[:notice] = 'Comment creation unsuccessful!'
+      flash[:notice] = 'Comment creation unsuccessful!'
       redirect_to post_path(@post)
     end
   end
