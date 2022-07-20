@@ -1,0 +1,23 @@
+<h3 class="text-center">Admin Dashboard</h3>
+<%= render 'admin/nav_links' %>
+
+<div class="row row-cols-6 my-2">
+  <% @users.each do |user| %>
+  <div class="card border-success">
+    <img
+      src="https://picsum.photos/300/200"
+      class="card-img-top"
+      alt="Random"
+    />
+    <div class="card-body">
+      <h5 class="card-title"><%= user.name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <%= user.email %>
+      </h6>
+      <p class="card-text">
+        <%= pluralize(user.views, "view") %>
+      </p>
+    </div>
+  </div>
+  <% end %>
+</div>
