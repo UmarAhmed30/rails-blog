@@ -6,13 +6,16 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(comment_params)
     @comment.user = current_user
 
-    if @comment.save
-      flash[:notice] = 'Comment created successfully!'
-      redirect_to post_path(@post)
-    else
-      flash[:notice] = 'Comment creation unsuccessful!'
-      redirect_to post_path(@post)
-    end
+    flash[:notice] = if @comment.save
+                       'Comment created successfully!'
+                     else
+                       'Comment creation unsuccessful!'
+                     end
+    redirect_to post_path(@post)
+  end
+
+  def edit
+    @comment = @post.comments.find(params[:id])
   end
 
   def update
@@ -20,9 +23,17 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to post_url(@post), notice: 'Comment updated successfully!' }
+        if params[:from] == 'admin'
+          format.html { redirect_to admin_post_path(@post), notice: 'Comment updated successfully!' }
+        else
+          format.html { redirect_to post_url(@post), notice: 'Comment updated successfully!' }
+        end
       else
-        format.html { redirect_to post_url(@post), alert: 'Comment creation unsuccessful!' }
+        if params[:from] == 'admin'
+          format.html { redirect_to admin_post_path(@post), alert: 'Comment creation unsuccessful!' }
+        else
+          format.html { redirect_to post_url(@post), alert: 'Comment creation unsuccessful!' }
+        end
       end
     end
   end
@@ -30,7 +41,11 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    redirect_to post_path(@post)
+    if params[:route] == 'from_admin'
+      redirect_to admin_post_path(@post)
+    else
+      redirect_to post_path(@post)
+    end
   end
 
   private

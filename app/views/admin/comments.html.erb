@@ -5,7 +5,14 @@
   <% @comments.each do |comment| %>
   <div class="card border-info my-5">
     <div class="card-header">
-        <%= "#{comment.user.name} commented on #{comment.post.user.name}'s post" %>
+        <%= link_to comment.user.name, user_path(comment.user) %>
+        <span>commented on</span>
+        <%= link_to comment.post.user.name, user_path(comment.post.user) %>
+        <span>'s post</span>
+        <div class="float-end btn-group">
+          <%= link_to '<i class="bi bi-pencil-square mx-4 btn btn-warning"></i>'.html_safe, edit_post_comment_path(comment.post, comment) %>
+          <%= button_to '<i class="bi bi-trash-fill"></i>'.html_safe, post_comment_path(comment.post, comment), method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}, class: 'btn btn-danger', params: {route: 'from_admin'} %>
+        </div>
     </div>
     <div class="card-body">
       <blockquote class="blockquote mb-0">
