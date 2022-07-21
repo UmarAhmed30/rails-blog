@@ -17,7 +17,7 @@
         btn-outline-danger mx-2" %>
       </div>
     </div>
-    <div class="card-footer text-muted"><%= pluralize(@post.views, "view") %></div>
+    <div class="card-footer text-muted"><i class="bi bi-eye-fill"></i> <%= pluralize(@post.views, "view") %></div>
   </div>
 
   <div class="container">
@@ -31,8 +31,12 @@
                 <%= "#{comment.user.email}" %>
               </h6>
               <p class="card-text"><%= comment.body %></p>
+              <div class="btn-group">
+                <%= link_to 'Edit', edit_post_comment_path(@post, comment), class: "btn btn-outline-warning" %> 
+                <%= button_to 'Delete', post_comment_path(@post, comment), method: :delete, form: { data: {turbo_confirm: "Are you sure?"}}, class: "btn btn-outline-danger mx-2", params: {route: 'from_admin'} %>
+              </div>
             </div>
-            <div class="card-footer text-muted"><%= pluralize(comment.user.views, "view") %></div>
+            <div class="card-footer text-muted">User popularity: <%= pluralize(comment.user.views, "view") %></div>
         </div>
         <% end %>
     </div>

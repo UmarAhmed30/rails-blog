@@ -10,11 +10,14 @@
       alt="Random"
     />
     <div class="card-body">
-      <h5 class="card-title"><%= user.name %></h5>
+      <h5 class="card-title">
+        <%= link_to user.name, user_path(user) %>
+      </h5>
       <h6 class="card-subtitle mb-2 text-muted">
         <%= user.email %>
       </h6>
       <p class="card-text">
+        <i class="bi bi-eye-fill"></i>
         <%= pluralize(user.views, "view") %>
       </p>
     </div>
